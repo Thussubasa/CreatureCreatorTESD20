@@ -2,7 +2,7 @@
 
 <html ng-app="creatureCreator">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Creature Creator </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -78,97 +78,196 @@
               <option value="">Select a Training</option>
             </select>
           </div>
+          <div class="form-group">
+            <label>Role</label>
+            <select class="form-control" ng-model="npc.role" ng-options=" role.nome for role in roles" ng-required="true">
+              <option value="">Select a Role</option>
+            </select>
+          </div>
         </form>
         <form>
-          <div ng-if="npc.race.nome == 'Imperial'" class="form-group">
+          <div ng-if="npc.race.nome == 'Altmer'" class="form-group">
            <h4> Racial Traits</h4>
-           <label>Flexible</label>
-           <select class="form-control" ng-model="flexible.atributo" ng-required="true" ng-change="flexible(flexible.atributo)">
+           <p><span><strong>Highborn:</strong> Altmer increase their starting Magicka total
+            by 20%. If you distribute no points to Magicka, you start
+            with 10.</label> </p>
+            <p><span><strong>Arcanist:</strong> Choose any 1st level spell. You know and can
+              cast that spell as if you had Novice rank in its school.</span></p>
+              <p><span><strong>Resist Disease:</strong> Altmer start with 5 points of Disease
+                Resistance, which increases by 1 every 2 levels.</span></p>
+              </div>
+              <div ng-if="npc.race.nome == 'Argonian'" class="form-group">
+               <h4> Racial Traits</h4>
+               <label>imperialTraits</label>
+               <select class="form-control" ng-model="imperialTraits.atributo" ng-required="true" ng-change="imperialTraits(imperialTraits.atributo)">
+                <option value="health">10% Health</option>
+                <option value="magicka">10% Magicka</option>
+                <option value="stamina">10% Stamina</option>
+              </select>
+            </div>
+            <div ng-if="npc.race.nome == 'Bosmer'" class="form-group">
+             <h4> Racial Traits</h4>
+             <label>imperialTraits</label>
+             <select class="form-control" ng-model="imperialTraits.atributo" ng-required="true" ng-change="imperialTraits(imperialTraits.atributo)">
+              <option value="health">10% Health</option>
+              <option value="magicka">10% Magicka</option>
+              <option value="stamina">10% Stamina</option>
+            </select>
+          </div>
+          <div ng-if="npc.race.nome == 'Breton'" class="form-group">
+           <h4> Racial Traits</h4>
+           <label>imperialTraits</label>
+           <select class="form-control" ng-model="imperialTraits.atributo" ng-required="true" ng-change="imperialTraits(imperialTraits.atributo)">
             <option value="health">10% Health</option>
             <option value="magicka">10% Magicka</option>
             <option value="stamina">10% Stamina</option>
           </select>
         </div>
-      </form>
-      <h4>Starting Attributes ({{startpoints - npc.atributos.health.inicial - npc.atributos.magicka.inicial-npc.atributos.stamina.inicial}} points remaining)</h4>
-      <form class="form-inline">
-        <div class="form-group">
-          <label  >Health</label>
-          <input class="form-control" type="number" ng-change="traitMulti(npc.atributos.health.inicial)" ng-model="npc.atributos.health.inicial" min="0" ng-required="true">
-          <label  >{{npc.atributos.health.inicial * health.multiplicador | number:0}}</label>
-        </div>
-        <div class="form-group">
-          <label >Magicka</label>
-          <input class="form-control" type="number" ng-model="npc.atributos.magicka.inicial" min="0" ng-required="true">
-        </div>
-        <div class="form-group">
-          <label>Stamina</label>
-          <input class="form-control" type="number" ng-model="npc.atributos.stamina.inicial" ng-change="setStamina(npc.atributos.stamina.inicial, 0)" min="0" ng-required="true">
-        </div>
-      </form>
-      <h4>Levelup Atributes({{ !!npc.lvl ? (npc.lvl * 10 -10) - npc.atributos.health.lvl - npc.atributos.magicka.lvl - npc.atributos.stamina.lvl: 0}} points remaining)</h4>
-      <form class="form-inline">
-        <div class="form-group">
-          <label>Health</label>
-          <input class="form-control" type="number" ng-model="npc.atributos.health.lvl" ng-change="setHealth(npc.atributos.health.inicial, npc.atributos.health.lvl)" min="0" ng-required="true">
-        </div>
-        <div class="form-group">
-          <label>Magicka</label>
-          <input class="form-control" type="number" ng-model="npc.atributos.magicka.lvl" min="0" ng-required="true" ng-change="setMagicka(npc.atributos.magicka.inicial, npc.atributos.magicka.lvl)">
-        </div>
-        <div class="form-group">
-          <label>Stamina</label>
-          <input class="form-control" type="number" ng-model="npc.atributos.stamina.lvl" ng-change="setStamina(npc.atributos.stamina.inicial, npc.atributos.stamina.lvl)" min="0" ng-required="true">
-        </div>
-      </form>
-      <button class="btn btn-primary btn-block" ng-click="createnpc(npc)">Adicionar Npc</button>
+        <div ng-if="npc.race.nome == 'Dummer'" class="form-group">
+         <h4> Racial Traits</h4>
+         <label>imperialTraits</label>
+         <select class="form-control" ng-model="imperialTraits.atributo" ng-required="true" ng-change="imperialTraits(imperialTraits.atributo)">
+          <option value="health">10% Health</option>
+          <option value="magicka">10% Magicka</option>
+          <option value="stamina">10% Stamina</option>
+        </select>
+      </div>
+      <div ng-if="npc.race.nome == 'Imperial'" class="form-group">
+       <h4> Racial Traits</h4>
+       <span><strong>Voice of the Emperor:</strong> +2 in Speech checks </span> <br>
+       <label>Flexible</label>
+       <select class="form-control" ng-model="imperialTraits.atributo" ng-required="true" ng-change="imperialTraits(imperialTraits.atributo)">
+        <option value="health">10% Health</option>
+        <option value="magicka">10% Magicka</option>
+        <option value="stamina">10% Stamina</option>
+      </select>
+      <label>Might of the Empire</label>
+      <select class="form-control" ng-model="migthOfTheEmpire.skillWeapon" ng-required="true">
+        <option value="one-handed">+1 hit with one-handed</option>
+        <option value="two-handed">+1 hit with two-handed</option>
+        <option value="marksman">+1 hit with marksman</option>
+      </select>
     </div>
-    <div class="col-xs-6 col-sm-4 sidebar">
-     <h4>
-      NPC
-    </h4>
-    <p>
-      <strong>{{!!npc.lvl ? npc.lvl : 'Level' }} {{npc.race.nome}} (Type) - {{npc.intellegence}}, {{npc.treino}}, Role</strong>
-    </p>
-    <p>
-      <strong>{{!!npc.atributos.health.total ? npc.atributos.health.total + 'Health ': 'Health'}}</strong>
-      | <strong>{{!!npc.atributos.stamina.total ? npc.atributos.stamina.total + 'Stamina ' : 'Stamina'}}</strong> | <strong>{{!!npc.atributos.magicka.total ? npc.atributos.magicka.total + 'Magicka ' : 'Magicka'}}</strong>
-    </p>
-    <p>
-      <strong>{{!!npc.race ? npc.race.speed : 'Speed'}}</strong>
-      | <strong>{{!!npc.race ? npc.race.speed + 5 : 'Dodge'}}</strong>
-    </p>
-    <p>
-      <strong>DR</strong>
-      X: Y (Z)
-    </p>
-    <p>
-      <strong>Attacks</strong>
-    </p>
-    <p>
-      List here
-    </p>
-    <p>
-      <strong>Spells and Powers</strong>
-    </p>
-    <p>
-      List here
-    </p>
-    <p>
-      <strong>Perks and Abilities</strong>
-    </p>
-    <p>
-      List here
-    </p>
-    <p>
-      <strong>Equipment and Loot</strong>
-    </p>
-    <p>
-      List here
-    </p>
-
-
+    <div ng-if="npc.race.nome == 'Khajiit'" class="form-group">
+     <h4> Racial Traits</h4>
+     <label>imperialTraits</label>
+     <select class="form-control" ng-model="imperialTraits.atributo" ng-required="true" ng-change="imperialTraits(imperialTraits.atributo)">
+      <option value="health">10% health</option>
+      <option value="magicka">10% magicka</option>
+      <option value="stamina">10% stamina</option>
+    </select>
   </div>
+  <div ng-if="npc.race.nome == 'Nord'" class="form-group">
+   <h4> Racial Traits</h4>
+   <label>imperialTraits</label>
+   <select class="form-control" ng-model="imperialTraits.atributo" ng-required="true" ng-change="imperialTraits(imperialTraits.atributo)">
+    <option value="health">10% Health</option>
+    <option value="magicka">10% Magicka</option>
+    <option value="stamina">10% Stamina</option>
+  </select>
+</div>
+<div ng-if="npc.race.nome == 'Orc'" class="form-group">
+ <h4> Racial Traits</h4>
+ <label>imperialTraits</label>
+ <select class="form-control" ng-model="imperialTraits.atributo" ng-required="true" ng-change="imperialTraits(imperialTraits.atributo)">
+  <option value="health">10% Health</option>
+  <option value="magicka">10% Magicka</option>
+  <option value="stamina">10% Stamina</option>
+</select>
+</div>
+<div ng-if="npc.race.nome == 'Redguard'" class="form-group">
+ <h4> Racial Traits</h4>
+ <label>imperialTraits</label>
+ <select class="form-control" ng-model="imperialTraits.atributo" ng-required="true" ng-change="imperialTraits(imperialTraits.atributo)">
+  <option value="health">10% Health</option>
+  <option value="magicka">10% Magicka</option>
+  <option value="stamina">10% Stamina</option>
+</select>
+</div>
+</form>
+<h4>Starting Attributes ({{startpoints - npc.atributos.health.inicial - npc.atributos.magicka.inicial-npc.atributos.stamina.inicial}} points remaining)</h4>
+<form class="form-inline">
+  <div class="form-group">
+    <label  >Health</label>
+    <input class="form-control" type="number" ng-change="setHealth(npc.atributos.health.inicial, 0)" ng-model="npc.atributos.health.inicial" min="0" ng-required="true">
+    <label  >{{npc.atributos.health.inicial * health.multiplicador | number:0}}</label>
+  </div>
+  <div class="form-group">
+    <label>Stamina</label>
+    <input class="form-control" type="number" ng-model="npc.atributos.stamina.inicial" ng-change="setStamina(npc.atributos.stamina.inicial, 0)" min="0" ng-required="true">
+  </div>
+  <div class="form-group">
+    <label >Magicka</label>
+    <input class="form-control" type="number" ng-model="npc.atributos.magicka.inicial" ng-change="setMagicka(npc.atributos.magicka.inicial, 0)" min="0" ng-required="true">
+  </div>
+</form>
+<h4>Levelup Atributes({{ !!npc.lvl ? (npc.lvl * 10 -10) - npc.atributos.health.lvl - npc.atributos.magicka.lvl - npc.atributos.stamina.lvl: 0}} points remaining)</h4>
+<form class="form-inline">
+  <div class="form-group">
+    <label>Health</label>
+    <input class="form-control" type="number" ng-model="npc.atributos.health.lvl" ng-change="setHealth(npc.atributos.health.inicial, 0)" min="0" ng-required="true">
+  </div>
+  <div class="form-group">
+    <label>Stamina</label>
+    <input class="form-control" type="number" ng-model="npc.atributos.stamina.lvl" ng-change="setStamina(npc.atributos.stamina.inicial, npc.atributos.stamina.lvl)" min="0" ng-required="true">
+  </div>
+  <div class="form-group">
+    <label>Magicka</label>  
+    <input class="form-control" type="number" ng-model="npc.atributos.magicka.lvl" min="0" ng-required="true" ng-change="setMagicka(npc.atributos.magicka.inicial, npc.atributos.magicka.lvl)">
+  </div>
+</form>
+<button class="btn btn-primary btn-block" ng-click="createnpc(npc)">Adicionar Npc</button>
+</div>
+<div class="col-xs-6 col-sm-4 sidenav">
+ <h4>
+  Creature Sheet
+</h4>
+<p>
+  <strong>{{!!npc.lvl ? npc.lvl : 'Level' }} {{!!npc.race.nome ? npc.race.nome : 'Race'}} {{!!npc.race ? '(' + npc.race.type + ')' : '(Type)'}} - {{!!npc.intelligence.type ? npc.intelligence.type : 'Intelligence'}}, {{!!npc.treino.type ? npc.treino.type : 'Training'}}, {{!!npc.role ? npc.role.nome : 'Role'}}</strong>
+</p>
+<p>
+  <strong>{{!!npc.atributos.health.total ? npc.atributos.health.total + ' Health ': 'Health'}}</strong>
+  | <strong>{{!!npc.atributos.stamina.total ? npc.atributos.stamina.total + ' Stamina ' : 'Stamina'}}</strong> | <strong>{{!!npc.atributos.magicka.total ? npc.atributos.magicka.total + ' Magicka ' : 'Magicka'}}</strong>
+</p>
+<p>
+  <strong>{{!!npc.speed ? npc.speed : 'Speed'}}</strong>
+  | <strong>{{!!npc.dodge ? npc.dodge : 'Dodge'}}</strong>
+</p>
+<p>
+  <strong>DR</strong>
+  {{!!npc.damageReduction ? npc.damageReduction : 'X'}}: Y (Z)
+</p>
+<p>
+<strong>Defenses</strong>
+  {{(npc.magicResistence + 'MR') + !!npc.diseaseResistance ? npc.diseaseResistance : ''}}
+</p>
+<p>
+  <strong>Attacks</strong>
+</p>
+<p>
+  List here
+</p>
+<p>
+  <strong>Spells and Powers</strong>
+</p>
+<p>
+  List here
+</p>
+<p>
+  <strong>Perks and Abilities</strong>
+</p>
+<p>
+  List here
+</p>
+<p>
+  <strong>Equipment and Loot</strong>
+</p>
+<p>
+  List here
+</p>
+
+
+</div>
 </div>
 </body>
 </html>

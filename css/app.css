@@ -38,6 +38,7 @@ hr {
   padding-top: 20px;
   background-color: #f1f1f1;
   height: 100%;
+  position: fixed;
 }
 
 /* Set black background color, white text and some padding */
