@@ -2,120 +2,173 @@
 
 <html ng-app="creatureCreator">
 <head>
-	<title>Bootstrap Example</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/app.css">
-	<script src="lib/angular/angular.js"></script>
-	<script src="lib/angular/angular-messages.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/controllers/creatureCreatorCtrl.js"></script>
-	<script src="lib/bootstrap/bootstrap.js"></script>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/app.css">
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-messages.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers/creatureCreatorCtrl.js"></script>
+  <script src="lib/bootstrap/bootstrap.js"></script>
 
 
 </head>
 <body ng-controller="creatureCreatorCtrl">
 
-	<div class="container-fluid text-center">
-		<div class="row content">
-			<div class="col-sm-12 text-left text-ali text-center">
-				<h1>{{app}}</h1>
-				<hr>
-				<h3>Race, Level and Attributes</h3>
-				<form>
-					<div class="form-group">
-						<label for="inputrace" class="col-sm-2 control-label">Race:</label>
-						<div class="col-sm-10"> 
-							<select class="form-control" ng-model="npc.race" ng-options=" race.nome for race in races | orderBy:'nome'" ng-required="true" ng-change="setRace(npc.race)">
-								<option value="">Select a Race</option>
-							</select>
-						</div>
-					</div>
-					<h4>Level and progresion</h4>
-					<div class="form-group">
-						<label  class="col-sm-2 control-label">Level</label>
-						<div class="col-sm-10"> 
-							<input class="form-control" type="number" ng-model="npc.lvl" min="1" max="20" ng-required="true">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Intelligence</label>
-						<div class="col-sm-10"> 
-							<select class="form-control" ng-model="npc.intelligence" ng-options=" intelligence.type for intelligence in intelligences" ng-required="true">
-								<option value="">Select a Intelligence</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Training</label>
-						<div class="col-sm-10"> 
-							<select class="form-control" ng-model="npc.treino" ng-options=" training.type for training in trainings" ng-required="true">
-								<option value="">Select a Training</option>
-							</select>
-						</div>
-					</div>
-				</form>
-				<h4> Racial Traits</h4>
-				<form>
-					<div ng-if="npc.race.nome == 'Imperial'" class="form-group">
-						<label class="col-sm-2 control-label">Flexible</label>
-						<div class="col-sm-10"> 
-							<select class="form-control" ng-model="flexible.atributo" ng-required="true" ng-change="flexible(flexible.atributo)">
-								<option value="health">10% Health</option>
-								<option value="magicka">10% Magicka</option>
-								<option value="stamina">10% Stamina</option>
-							</select>
-						</div>
-					</form>
-					<h4>Starting Attributes ({{startpoints - npc.attributos.health.inicial - npc.attributos.magicka.inicial-npc.attributos.stamina.inicial}} points remaining)</h4>
-					<form class="form-inline">
-						<div class="col-sm-2 col-sm-offset-2">
-							<div class="form-group">
-								<label  class="col-sm-2 control-label" >Health</label>
-								<input class="form-control" type="number" ng-change="traitMulti(npc.attributos.health.inicial)" ng-model="npc.attributos.health.inicial" min="0" ng-required="true">
-							</div>
-						</div>
-						<div class="col-sm-2 col-sm-offset-2">
-							<div class="form-group">
-								<label class="col-sm-2 control-label" >Magicka</label>
-								<input class="form-control" type="number" ng-model="npc.attributos.magicka.inicial" min="0" ng-required="true">
-							</div>
-						</div>
-						<div class="col-sm-2 col-sm-offset-2">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">Stamina</label>
-								<input class="form-control" type="number" ng-model="npc.attributos.stamina.inicial" min="0" ng-required="true">
-							</div>
-						</div>
-					</form>
-					<h4>Levelup Atributes({{(npc.lvl * 10 -10) - npc.attributos.health.final - npc.attributos.magicka.final - npc.attributos.stamina.final}} points remaining)</h4>
-					<form class="form-inline">
-						<div class="col-sm-2 col-sm-offset-2">
-							<div class="form-group">
-								<label  class="col-sm-2 control-label" >Health</label>
-								<input class="form-control" type="number" ng-model="npc.attributos.health.atual" min="0" ng-required="true">
-							</div>
-						</div>
-						<div class="col-sm-2 col-sm-offset-2">
-							<div class="form-group">
-								<label class="col-sm-2 control-label" >Magicka</label>
-								<input class="form-control" type="number" ng-model="npc.attributos.magicka.atual" min="0" ng-required="true">
-							</div>
-						</div>
-						<div class="col-sm-2 col-sm-offset-2">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">Stamina</label>
-								<input class="form-control" type="number" ng-model="npc.attributos.stamina.atual" min="0" ng-required="true">
-							</div>
-						</div>
-					</form>
-					<button class="btn btn-primary btn-block" ng-click="createnpc(npc)">Adicionar Contato</button>
-				</div>
-			</div>
-		</div>
-	</div>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Logo</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container-fluid">
+    <div class="row content">
+      <div class=" col-xs-6 col-sm-4">
+        <p><a href="#">Link</a></p>
+        <p><a href="#">Link</a></p>
+        <p><a href="#">Link</a></p>
+      </div>
+      <div class="col-xs-6 col-sm-4 text-left">
+        <h1>{{app}}</h1>
+        <hr>
+        <h3>Race, Level and Attributes</h3>
+        <form>
+          <div class="form-group">
+            <label for="inputrace">Race:</label>
+            <select class="form-control" ng-model="npc.race" ng-options=" race.nome for race in races | orderBy:'nome'" ng-required="true" ng-change="setRace(npc.race)">
+              <option value="">Select a Race</option>
+            </select>
+          </div>
+          <h4>Level and progresion</h4>
+          <div class="form-group">
+            <label >Level</label>
+            <input class="form-control" type="number" ng-model="npc.lvl" min="1" max="20" ng-required="true">
+          </div>
+          <div class="form-group">
+            <label>Intelligence</label>
+            <select class="form-control" ng-model="npc.intelligence" ng-options=" intelligence.type for intelligence in intelligences" ng-required="true">
+              <option value="">Select a Intelligence</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Training</label>
+            <select class="form-control" ng-model="npc.treino" ng-options=" training.type for training in trainings" ng-required="true">
+              <option value="">Select a Training</option>
+            </select>
+          </div>
+        </form>
+        <form>
+          <div ng-if="npc.race.nome == 'Imperial'" class="form-group">
+           <h4> Racial Traits</h4>
+           <label>Flexible</label>
+           <select class="form-control" ng-model="flexible.atributo" ng-required="true" ng-change="flexible(flexible.atributo)">
+            <option value="health">10% Health</option>
+            <option value="magicka">10% Magicka</option>
+            <option value="stamina">10% Stamina</option>
+          </select>
+        </div>
+      </form>
+      <h4>Starting Attributes ({{startpoints - npc.atributos.health.inicial - npc.atributos.magicka.inicial-npc.atributos.stamina.inicial}} points remaining)</h4>
+      <form class="form-inline">
+        <div class="form-group">
+          <label  >Health</label>
+          <input class="form-control" type="number" ng-change="traitMulti(npc.atributos.health.inicial)" ng-model="npc.atributos.health.inicial" min="0" ng-required="true">
+          <label  >{{npc.atributos.health.inicial * health.multiplicador | number:0}}</label>
+        </div>
+        <div class="form-group">
+          <label >Magicka</label>
+          <input class="form-control" type="number" ng-model="npc.atributos.magicka.inicial" min="0" ng-required="true">
+        </div>
+        <div class="form-group">
+          <label>Stamina</label>
+          <input class="form-control" type="number" ng-model="npc.atributos.stamina.inicial" ng-change="setStamina(npc.atributos.stamina.inicial, 0)" min="0" ng-required="true">
+        </div>
+      </form>
+      <h4>Levelup Atributes({{ !!npc.lvl ? (npc.lvl * 10 -10) - npc.atributos.health.lvl - npc.atributos.magicka.lvl - npc.atributos.stamina.lvl: 0}} points remaining)</h4>
+      <form class="form-inline">
+        <div class="form-group">
+          <label>Health</label>
+          <input class="form-control" type="number" ng-model="npc.atributos.health.lvl" ng-change="setHealth(npc.atributos.health.inicial, npc.atributos.health.lvl)" min="0" ng-required="true">
+        </div>
+        <div class="form-group">
+          <label>Magicka</label>
+          <input class="form-control" type="number" ng-model="npc.atributos.magicka.lvl" min="0" ng-required="true" ng-change="setMagicka(npc.atributos.magicka.inicial, npc.atributos.magicka.lvl)">
+        </div>
+        <div class="form-group">
+          <label>Stamina</label>
+          <input class="form-control" type="number" ng-model="npc.atributos.stamina.lvl" ng-change="setStamina(npc.atributos.stamina.inicial, npc.atributos.stamina.lvl)" min="0" ng-required="true">
+        </div>
+      </form>
+      <button class="btn btn-primary btn-block" ng-click="createnpc(npc)">Adicionar Npc</button>
+    </div>
+    <div class="col-xs-6 col-sm-4 sidebar">
+     <h4>
+      NPC
+    </h4>
+    <p>
+      <strong>{{!!npc.lvl ? npc.lvl : 'Level' }} {{npc.race.nome}} (Type) - {{npc.intellegence}}, {{npc.treino}}, Role</strong>
+    </p>
+    <p>
+      <strong>{{!!npc.atributos.health.total ? npc.atributos.health.total + 'Health ': 'Health'}}</strong>
+      | <strong>{{!!npc.atributos.stamina.total ? npc.atributos.stamina.total + 'Stamina ' : 'Stamina'}}</strong> | <strong>{{!!npc.atributos.magicka.total ? npc.atributos.magicka.total + 'Magicka ' : 'Magicka'}}</strong>
+    </p>
+    <p>
+      <strong>{{!!npc.race ? npc.race.speed : 'Speed'}}</strong>
+      | <strong>{{!!npc.race ? npc.race.speed + 5 : 'Dodge'}}</strong>
+    </p>
+    <p>
+      <strong>DR</strong>
+      X: Y (Z)
+    </p>
+    <p>
+      <strong>Attacks</strong>
+    </p>
+    <p>
+      List here
+    </p>
+    <p>
+      <strong>Spells and Powers</strong>
+    </p>
+    <p>
+      List here
+    </p>
+    <p>
+      <strong>Perks and Abilities</strong>
+    </p>
+    <p>
+      List here
+    </p>
+    <p>
+      <strong>Equipment and Loot</strong>
+    </p>
+    <p>
+      List here
+    </p>
+
+
+  </div>
+</div>
 </body>
 </html>
