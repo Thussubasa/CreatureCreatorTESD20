@@ -1,1 +1,1 @@
-angular.module("creatureCreator", ["ngMessages"]);
+angular.module("creatureCreator", ["ngMessages", "ngRoute"]);
