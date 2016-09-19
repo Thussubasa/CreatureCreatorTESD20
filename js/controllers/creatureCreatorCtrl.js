@@ -1,9 +1,14 @@
 angular.module("creatureCreator").controller("creatureCreatorCtrl", function ($scope, $http) {
-
-	
+	$scope.npc = {
+		atributos: {
+			magicka: {}, stamina:{}, health:{}
+		}, race: {}, lvll:{}, role:{}
+	}
+	$scope.teste = 1;
 	$scope.app = "Creature Creator";
 
-	$scope.npcs = [{name: "", level: "", race: "", role: "",intelligence: "", training: "", attributos: "", speed: "", dodge: "", damageReduction: "", diseaseResistance: ""}];
+
+	$scope.npcs = [{name: "", lvl: "", race: "", role: "",intelligence: "", training: "", atributos: "", speed: "", dodge: "", damageReduction: "", diseaseResistance: ""}];
 	var modDodge= 5;
 	var baseDR=0;
 	var baseMagicResistence = 8;
@@ -32,13 +37,28 @@ angular.module("creatureCreator").controller("creatureCreatorCtrl", function ($s
 	{type: "Trained"}
 	];
 
-	$scope.health= {inicial: 100, atual: 100, bonus: 100, multiplicador: 1};
-	$scope.magicka= {inicial: 0, atual: 0, bonus: 0, multiplicador: 1};
-	$scope.stamina= {inicial: 0, atual: 0, bonus: 0, multiplicador: 1};
+	$scope.health= {inicial: 100, atual: 100, bonus: 100, multiplicador: 1, minValue: 15};
+	$scope.magicka= {inicial: 0, atual: 0, bonus: 0, multiplicador: 1, minValue: 0};
+	$scope.stamina= {inicial: 0, atual: 0, bonus: 0, multiplicador: 1, minValue: 0};
 
-	$scope.attributos=[{health: 0, magicka: 0, stamina: 0}];
 
-	
+	$scope.atributos=[{health: 0, magicka: 0, stamina: 0}];
+
+	$scope.$watch('npc.atributos.magicka.inicial', function() {
+		$scope.setMagicka($scope.npc.atributos.magicka.inicial, 0);
+	});
+	$scope.$watch('npc.atributos.health.inicial', function() {
+		$scope.setHealth($scope.npc.atributos.health.inicial, 0);
+	});
+	$scope.$watch('npc.atributos.stamina.inicial', function() {
+		$scope.setStamina($scope.npc.atributos.stamina.inicial, 0);
+	});
+	$scope.$watch('npc.lvl', function(){
+		$scope.altmerTraits();
+
+	});
+
+
 
 	$scope.createNpc= function(npc) {
 		$scope.npcs.push(angular.copy(npc));
@@ -49,22 +69,34 @@ angular.module("creatureCreator").controller("creatureCreatorCtrl", function ($s
 		if (race.nome == "Altmer") $scope.altmerTraits();
 		if (race.nome == "Redguard") $scope.redguardTraits();
 		if (race.nome == "Breton") $scope.bretonTraits();
+
+		
 	};
 
-	$scope.altmerTraits = function(npc){
+	$scope.altmerTraits = function(){
 		$scope.npc.magicResistence = baseMagicResistence;
 		$scope.magicka.multiplicador = 1.2;
-//		$scope.npc.diseaseResistance = 5 + Math.floor(npc.lvl/2);
+		$scope.magicka.minValue = 10;
+		$scope.stamina.minValue = 0;
+		$scope.npc.atributos.magicka.inicial = $scope.magicka.minValue;
+		$scope.npc.atributos.stamina.inicial = $scope.stamina.minValue ;
+		$scope.npc.atributos.health.inicial = $scope.health.minValue;
+		$scope.npc.diseaseResistance = 5 + Math.floor($scope.npc.lvl/2);
 
 };
 
-$scope.redguardTraits = function(npc){
+$scope.redguardTraits = function(){
 	$scope.npc.magicResistence = baseMagicResistence;
 	$scope.stamina.multiplicador = 1.2;
-	$scope.npc.atributos.stamina.inicial = 10;
+	$scope.magicka.minValue = 0;
+	$scope.stamina.minValue = 10
+	$scope.npc.atributos.stamina.inicial = $scope.stamina.minValue ;
+	$scope.npc.atributos.magicka.inicial = $scope.magicka.minValue;
+	$scope.npc.atributos.health.inicial = $scope.health.minValue;
+	
 };
 
-$scope.bretonTraits = function(npc){
+$scope.bretonTraits = function(){
 	$scope.npc.magicResistence = 12;
 	$scope.magicka.multiplicador = 1.1;
 
@@ -80,27 +112,40 @@ $scope.imperialTraits = function(atributo){
 	};
 
 	$scope.setStamina = function(atributoinicial, atributolvl){
-		$scope.npc.atributos.stamina.total = Math.floor(atributoinicial * $scope.stamina.multiplicador) + atributolvl; 
+		var a = 0;
+		a ++;
+		console.log(a);
+		$scope.npc.atributos.stamina.total = Math.floor(atributoinicial * $scope.stamina.multiplicador) + atributolvl;
 		setSpeed($scope.npc);
 
 	};
 
 
 	$scope.setMagicka = function(atributoinicial, atributolvl){
-		$scope.npc.atributos.magicka.total = Math.floor(atributoinicial * $scope.magicka.multiplicador) + atributolvl;
-		Math.floor($scope.npc.atributos.magicka.total);
+		if (!!atributoinicial && !!atributolvl) {
+			$scope.npc.atributos.magicka.total = Math.floor(atributoinicial * $scope.magicka.multiplicador) + atributolvl;
+		} else{
+			$scope.npc.atributos.magicka.total  = $scope.magicka.minValue;
+
+
+		}
 
 	}; 
 
 
 	$scope.setHealth = function(atributoinicial, atributolvl){
-		$scope.npc.atributos.health.total = Math.floor(atributoinicial * $scope.health.multiplicador) + atributolvl;
+		if (!!atributoinicial && !!atributolvl) {
+			$scope.npc.atributos.health.total = Math.floor(atributoinicial * $scope.health.multiplicador) + atributolvl;
+		} else{
+			$scope.npc.atributos.health.total = $scope.health.minValue;
+		}
 		setDamageReduction($scope.npc);
 
 	};
 
 	function setSpeed(npc){
 		var modStamina = Math.floor(npc.atributos.stamina.total / 50);
+		console.log(modStamina);
 		$scope.npc.speed = npc.race.basespeed + modStamina;
 		setDodge($scope.npc);
 	}; 
@@ -108,11 +153,10 @@ $scope.imperialTraits = function(atributo){
 	function setDodge(npc){
 		$scope.npc.dodge= npc.speed + modDodge;
 	};
-	
+
 	function setDamageReduction(npc){
 		var modHealth =  Math.floor(npc.atributos.health.total / 50);
 		$scope.npc.damageReduction = baseDR + modHealth;
-		console.log($scope.npc.damageReduction);
 	};	
 
 

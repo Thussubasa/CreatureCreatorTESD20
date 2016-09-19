@@ -9,6 +9,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/app.css">
+  <link rel="stylesheet" type="text/css" href="css/full.css">
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-messages.js"></script>
   <script src="lib/angular/angular-route.js"></script>
@@ -28,14 +29,16 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav nav-tabs ">
           <li >
-            <a data-toggle="tab" class="active" href="#race">Home</a></li>
-            <li><a  data-toggle="tab" href="#skill">About</a></li>
-            <li><a  data-toggle="tab" href="#magic"">Projects</a></li>
-            <li><a data-toggle="tab" href="#gear">Contact</a></li>
+            <a data-toggle="tab" class="active" href="#race">Race</a></li>
+            <li><a  data-toggle="tab" href="#skill">Skills</a></li>
+            <li><a  data-toggle="tab" href="#magic"">Magic</a></li>
+            <li><a data-toggle="tab" href="#gear">Gear</a></li>
           </ul>
+
+          <div ng-view> </div>
+
           <div class="tab-content">
             <div class="tab-pane active" id="race">
-                  <div ng-view> </div>
             </div>
 
             <div class="tab-pane" id="skill"> 

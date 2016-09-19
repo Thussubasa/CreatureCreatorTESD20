@@ -1,0 +1,47 @@
+<h4>
+  Creature Sheet
+</h4>
+<p>
+  <strong>{{!!npc.lvl ? npc.lvl : 'Level' }} {{!!npc.race.nome ? npc.race.nome : 'Race'}} {{!!npc.race ? '(' + npc.race.type + ')' : '(Type)'}} - {{!!npc.intelligence.type ? npc.intelligence.type : 'Intelligence'}}, {{!!npc.treino.type ? npc.treino.type : 'Training'}}, {{!!npc.role ? npc.role.nome : 'Role'}}</strong>
+</p>
+<p>
+  <strong>{{!!npc.atributos.health.total ? npc.atributos.health.total + ' Health ': ' Health'}}</strong>
+  | <strong>{{!!npc.atributos.stamina.total ? npc.atributos.stamina.total + ' Stamina ' : ' 0 Stamina'}}</strong> | <strong>{{!!npc.atributos.magicka.total ? npc.atributos.magicka.total + ' Magicka ' : ' 0 Magicka'}}</strong>
+</p>
+<p>
+  <strong>{{!!npc.speed ? npc.speed : 'Speed'}}</strong>
+  | <strong>{{!!npc.dodge ? npc.dodge : 'Dodge'}}</strong>
+</p>
+<p>
+  <strong>DR</strong>
+  {{!!npc.damageReduction ? npc.damageReduction : 'X'}}: Y (Z)
+</p>
+<p>
+  <strong>Defenses: </strong>
+  {{(npc.magicResistence + ' MR') + (!!npc.diseaseResistance ? ' ' + npc.diseaseResistance + ' Disease
+Resistance': '')}}
+</p>
+<p>
+  <strong>Attacks</strong>
+</p>
+<p>
+  List here
+</p>
+<p>
+  <strong>Spells and Powers</strong>
+</p>
+<p>
+  List here
+</p>
+<p>
+  <strong>Perks and Abilities</strong>
+</p>
+<p>
+  List here
+</p>
+<p>
+  <strong>Equipment and Loot</strong>
+</p>
+<p>
+  List here
+</p>

@@ -1,4 +1,4 @@
-              <div ng-controller="creatureCreatorCtrl">
+                <div ng-controller="creatureCreatorCtrl">
                 <div class="container-fluid">
                   <div class="row content">
                     <div class="col-md-8">
@@ -157,9 +157,8 @@
         <h4>Starting Attributes ({{startpoints - npc.atributos.health.inicial - npc.atributos.magicka.inicial-npc.atributos.stamina.inicial}} points remaining)</h4>
         <form class="form-inline">
           <div class="form-group">
-            <label  >Health</label>
+            <label >Health</label>
             <input class="form-control" type="number" ng-change="setHealth(npc.atributos.health.inicial, 0)" ng-model="npc.atributos.health.inicial" min="0" ng-required="true">
-            <label  >{{npc.atributos.health.inicial * health.multiplicador | number:0}}</label>
           </div>
           <div class="form-group">
             <label>Stamina</label>
@@ -167,14 +166,14 @@
           </div>
           <div class="form-group">
             <label >Magicka</label>
-            <input class="form-control" type="number" ng-model="npc.atributos.magicka.inicial" ng-change="setMagicka(npc.atributos.magicka.inicial, 0)" min="0" ng-required="true">
+            <input class="form-control" type="number" ng-model="npc.atributos.magicka.inicial" ng-change="setMagicka(npc.atributos.magicka.inicial, 0)" min="0" ng-required="true" value="0">
           </div>
         </form>
         <h4>Levelup Atributes({{ !!npc.lvl ? (npc.lvl * 10 -10) - npc.atributos.health.lvl - npc.atributos.magicka.lvl - npc.atributos.stamina.lvl: 0}} points remaining)</h4>
         <form class="form-inline">
           <div class="form-group">
             <label>Health</label>
-            <input class="form-control" type="number" ng-model="npc.atributos.health.lvl" ng-change="setHealth(npc.atributos.health.inicial, 0)" min="0" ng-required="true">
+            <input class="form-control" type="number" ng-model="npc.atributos.health.lvl" ng-change="setHealth(npc.atributos.health.inicial, npc.atributos.health.lvl)" min="0" ng-required="true">
           </div>
           <div class="form-group">
             <label>Stamina</label>
@@ -185,59 +184,12 @@
             <input class="form-control" type="number" ng-model="npc.atributos.magicka.lvl" min="0" ng-required="true" ng-change="setMagicka(npc.atributos.magicka.inicial, npc.atributos.magicka.lvl)">
           </div>
         </form>
-
+{{npc}}
 
         <button class="btn btn-primary btn-block" ng-click="createnpc(npc)">Adicionar Npc</button>
       </div>
       <div class="col-md-4 sidenav">
-       <h4>
-        Creature Sheet
-      </h4>
-      <p>
-        <strong>{{!!npc.lvl ? npc.lvl : 'Level' }} {{!!npc.race.nome ? npc.race.nome : 'Race'}} {{!!npc.race ? '(' + npc.race.type + ')' : '(Type)'}} - {{!!npc.intelligence.type ? npc.intelligence.type : 'Intelligence'}}, {{!!npc.treino.type ? npc.treino.type : 'Training'}}, {{!!npc.role ? npc.role.nome : 'Role'}}</strong>
-      </p>
-      <p>
-        <strong>{{!!npc.atributos.health.total ? npc.atributos.health.total + ' Health ': 'Health'}}</strong>
-        | <strong>{{!!npc.atributos.stamina.total ? npc.atributos.stamina.total + ' Stamina ' : 'Stamina'}}</strong> | <strong>{{!!npc.atributos.magicka.total ? npc.atributos.magicka.total + ' Magicka ' : 'Magicka'}}</strong>
-      </p>
-      <p>
-        <strong>{{!!npc.speed ? npc.speed : 'Speed'}}</strong>
-        | <strong>{{!!npc.dodge ? npc.dodge : 'Dodge'}}</strong>
-      </p>
-      <p>
-        <strong>DR</strong>
-        {{!!npc.damageReduction ? npc.damageReduction : 'X'}}: Y (Z)
-      </p>
-      <p>
-        <strong>Defenses: </strong>
-        {{(npc.magicResistence + ' MR') + (!!npc.diseaseResistance ? npc.diseaseResistance : '')}}
-      </p>
-      <p>
-        <strong>Attacks</strong>
-      </p>
-      <p>
-        List here
-      </p>
-      <p>
-        <strong>Spells and Powers</strong>
-      </p>
-      <p>
-        List here
-      </p>
-      <p>
-        <strong>Perks and Abilities</strong>
-      </p>
-      <p>
-        List here
-      </p>
-      <p>
-        <strong>Equipment and Loot</strong>
-      </p>
-      <p>
-        List here
-      </p>
-
-
+      <div ng-include="'view/creatureSheet.html'"></div>
     </div>
   </div>
 </div>
