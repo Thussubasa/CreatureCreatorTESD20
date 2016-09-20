@@ -20,9 +20,11 @@
   <strong>Defenses: </strong>
 </p>
 <p>
-  {{npc.magicResistence + ' MR'}}<br>
-  {{!!npc.diseaseResistance ? ' ' + npc.diseaseResistance + ' Disease
-  Resistance': ''}}
+  {{npc.resistances.magicResistence + ' MR'}}<br>
+  {{!!npc.resistances.diseaseResistance ? ' ' + npc.resistances.diseaseResistance + ' Disease
+  Resistance': ''}}<br>
+  {{!!npc.resistances.poisonResistance ? ' ' + npc.resistances.poisonResistance + ' Poison
+  Resistance': ''}}<br>
 </p>
 <p>
   <strong>Attacks</strong>

@@ -1,4 +1,4 @@
-                <div ng-controller="creatureCreatorCtrl">
+                <div ng-controller="raceCtrl">
                 <div class="container-fluid">
                   <div class="row content">
                     <div class="col-sm-8" id="left">
@@ -94,7 +94,7 @@
                    <form>
                      <span><strong>Voice of the Emperor:</strong> +2 in Speech checks </span> <br>
                      <label>Flexible</label>
-                     <select class="form-control" ng-model="imperialTraits.atributo" ng-required="true" ng-change="imperialTraits(imperialTraits.atributo)">
+                     <select class="form-control" ng-model="imperialTraits.atributo" ng-required="true" ng-change="flexible(imperialTraits.atributo)">
                       <option value="health">10% Health</option>
                       <option value="magicka">10% Magicka</option>
                       <option value="stamina">10% Stamina</option>
@@ -128,7 +128,7 @@
                   <option value="stamina">10% Stamina</option>
                 </select>
               </form>
-              <hr>
+              <hr> 
             </div>
             <div ng-if="npc.race.nome == 'Orc'" class="form-group">
              <h4> Racial Traits</h4>
@@ -155,7 +155,7 @@
           <hr>
         </div>
         <h4>Starting Attributes ({{startpoints - npc.atributos.health.inicial - npc.atributos.magicka.inicial-npc.atributos.stamina.inicial}} points remaining)</h4>
-        <form class="form-inline">
+        <form name="atributoInicialForm" class="form-inline">
           <div class="form-group">
             <label >Health</label>
             <input class="form-control" type="number" ng-change="setHealth(npc.atributos.health.inicial, 0)" ng-model="npc.atributos.health.inicial" min="0" ng-required="true">
@@ -166,7 +166,7 @@
           </div>
           <div class="form-group">
             <label >Magicka</label>
-            <input class="form-control" type="number" ng-model="npc.atributos.magicka.inicial" ng-change="setMagicka(npc.atributos.magicka.inicial, 0)" min="0" ng-required="true" value="0">
+            <input name="magickaInicialInput" class="form-control" type="number" ng-model="npc.atributos.magicka.inicial" ng-change="setMagicka(npc.atributos.magicka.inicial, 0)" min="0" ng-required="true" value="0">
           </div>
         </form>
         <h4>Levelup Atributes({{ !!npc.lvl ? (npc.lvl * 10 -10) - npc.atributos.health.lvl - npc.atributos.magicka.lvl - npc.atributos.stamina.lvl: 0}} points remaining)</h4>
