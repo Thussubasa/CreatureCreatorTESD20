@@ -73,51 +73,57 @@ angular.module("creatureCreator").controller("creatureCreatorCtrl", function ($s
 		
 	};
 
+
+	function setMinValueToStats(){
+		$scope.npc.atributos.stamina.inicial = $scope.stamina.minValue ;
+		$scope.npc.atributos.magicka.inicial = $scope.magicka.minValue;
+		$scope.npc.atributos.health.inicial = $scope.health.minValue;
+	};
+
+
 	$scope.altmerTraits = function(){
 		$scope.npc.magicResistence = baseMagicResistence;
 		$scope.magicka.multiplicador = 1.2;
 		$scope.magicka.minValue = 10;
 		$scope.stamina.minValue = 0;
-		$scope.npc.atributos.magicka.inicial = $scope.magicka.minValue;
-		$scope.npc.atributos.stamina.inicial = $scope.stamina.minValue ;
-		$scope.npc.atributos.health.inicial = $scope.health.minValue;
+		setMinValueToStats();
 		$scope.npc.diseaseResistance = 5 + Math.floor($scope.npc.lvl/2);
 
-};
+	};
 
-$scope.redguardTraits = function(){
-	$scope.npc.magicResistence = baseMagicResistence;
-	$scope.stamina.multiplicador = 1.2;
-	$scope.magicka.minValue = 0;
-	$scope.stamina.minValue = 10
-	$scope.npc.atributos.stamina.inicial = $scope.stamina.minValue ;
-	$scope.npc.atributos.magicka.inicial = $scope.magicka.minValue;
-	$scope.npc.atributos.health.inicial = $scope.health.minValue;
-	
-};
 
-$scope.bretonTraits = function(){
-	$scope.npc.magicResistence = 12;
-	$scope.magicka.multiplicador = 1.1;
+	$scope.redguardTraits = function(){
+		$scope.npc.magicResistence = baseMagicResistence;
+		$scope.stamina.multiplicador = 1.2;
+		$scope.magicka.minValue = 0;
+		$scope.stamina.minValue = 10
+		setMinValueToStats();
 
-}
+	};
 
-$scope.imperialTraits = function(atributo){
-	$scope.npc.magicResistence = baseMagicResistence;
-	if (atributo=="health") $scope.health.multiplicador = 1.1;
-	if (atributo=="stamina") $scope.stamina.multiplicador = 1.1;
-	if (atributo=="magicka") $scope.magicka.multiplicador= 1.1;
+	$scope.bretonTraits = function(){
+		$scope.npc.magicResistence = 12;
+		$scope.magicka.multiplicador = 1.1;
+		setMinValueToStats();
+
+	}
+
+	$scope.imperialTraits = function(atributo){
+		$scope.npc.magicResistence = baseMagicResistence;
+		if (atributo=="health") $scope.health.multiplicador = 1.1;
+		if (atributo=="stamina") $scope.stamina.multiplicador = 1.1;
+		if (atributo=="magicka") $scope.magicka.multiplicador= 1.1;
 
 		// Adcionar Voice of the Emperor e Might of the Empire
 	};
 
 	$scope.setStamina = function(atributoinicial, atributolvl){
-		var a = 0;
-		a ++;
-		console.log(a);
-		$scope.npc.atributos.stamina.total = Math.floor(atributoinicial * $scope.stamina.multiplicador) + atributolvl;
+		if (!!atributoinicial && !!atributolvl) {
+			$scope.npc.atributos.stamina.total = Math.floor(atributoinicial * $scope.stamina.multiplicador) + atributolvl;
+		} else{
+			$scope.npc.atributos.stamina.total  = $scope.stamina.minValue;
+		}
 		setSpeed($scope.npc);
-
 	};
 
 
@@ -126,8 +132,6 @@ $scope.imperialTraits = function(atributo){
 			$scope.npc.atributos.magicka.total = Math.floor(atributoinicial * $scope.magicka.multiplicador) + atributolvl;
 		} else{
 			$scope.npc.atributos.magicka.total  = $scope.magicka.minValue;
-
-
 		}
 
 	}; 

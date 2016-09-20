@@ -1,7 +1,7 @@
                 <div ng-controller="creatureCreatorCtrl">
                 <div class="container-fluid">
                   <div class="row content">
-                    <div class="col-md-8">
+                    <div class="col-sm-8" id="left">
                       <h1>{{app}}</h1>
                       <hr>
                       <h3>Race, Level and Attributes</h3>
@@ -188,7 +188,7 @@
 
         <button class="btn btn-primary btn-block" ng-click="createnpc(npc)">Adicionar Npc</button>
       </div>
-      <div class="col-md-4 sidenav">
+      <div class="col-sm-4 sidenav" id="right">
       <div ng-include="'view/creatureSheet.html'"></div>
     </div>
   </div>
