@@ -54,7 +54,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 		$scope.setStamina($scope.npc.atributos.stamina.inicial, 0);
 	});
 	$scope.$watch('npc.lvl', function(){
-		altmerTraits();
+	if (race.nome == "Altmer") altmerTraits();
 
 	});
 
