@@ -2,7 +2,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	$scope.npc = {
 		atributos: {
 			magicka: {}, stamina:{}, health:{}
-		}, race: {}, lvll:{}, role:{}, resistances: {}
+		}, race: {}, lvl:0, role:{}, resistances: {}
 	}
 	$scope.teste = 1;
 	$scope.app = "Creature Creator";
@@ -46,16 +46,38 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 
 	$scope.$watch('npc.atributos.magicka.inicial', function() {
 		$scope.setMagicka($scope.npc.atributos.magicka.inicial, 0);
+		if ($scope.npc.race.nome == "Altmer"){
+			if($scope.npc.atributos.magicka.inicial == 10 ) {
+				$scope.startpoints = 110;
+			}else{
+				$scope.startpoints = 100;
+			}
+		}
 	});
 	$scope.$watch('npc.atributos.health.inicial', function() {
 		$scope.setHealth($scope.npc.atributos.health.inicial, 0);
 	});
 	$scope.$watch('npc.atributos.stamina.inicial', function() {
 		$scope.setStamina($scope.npc.atributos.stamina.inicial, 0);
+		if ($scope.npc.race.nome == "Redguard"){
+			if($scope.npc.atributos.stamina.inicial == 10 ) {
+				$scope.startpoints = 110;
+			}else{
+				$scope.startpoints = 100;
+			}
+		}
 	});
 	$scope.$watch('npc.lvl', function(){
-	if (race.nome == "Altmer") altmerTraits();
-
+		if ($scope.npc.race.nome == "Altmer") altmerTraits();
+		if ($scope.npc.race.nome == "Argonian") argonianTraits();
+		if ($scope.npc.race.nome == "Redguard") redguardTraits();
+		if ($scope.npc.race.nome == "Breton") bretonTraits();
+		if ($scope.npc.race.nome == "Bosmer") bosmerTraits();
+		if ($scope.npc.race.nome == "Imperial") imperialTraits();
+		if ($scope.npc.race.nome == "Nord") nordTraits();
+		if ($scope.npc.race.nome == "Dummer") dummerTraits();
+		if ($scope.npc.race.nome == "Orc") orcTraits();
+		if ($scope.npc.race.nome == "Khajiit") khajithTraits();
 	});
 
 
@@ -70,8 +92,13 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 		if (race.nome == "Redguard") redguardTraits();
 		if (race.nome == "Breton") bretonTraits();
 		if (race.nome == "Argonian") argonianTraits();
-		if (race.nome == "Breton") bretonTraits();
-		if (race.nome == "Breton") bretonTraits();
+		if (race.nome == "Bosmer") bosmerTraits();
+		if (race.nome == "Imperial") imperialTraits();
+		if (race.nome == "Nord") nordTraits();
+		if (race.nome == "Dummer") dummerTraits();
+		if (race.nome == "Orc") orcTraits();
+		if (race.nome == "Khajiit") khajithTraits();
+
 
 		
 	};
@@ -145,7 +172,8 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 		setBasicMagicResistance();
 		$scope.stamina.multiplicador = 1.2;
 		$scope.magicka.minValue = 0;
-		$scope.stamina.minValue = 10
+		$scope.stamina.minValue = 10;
+		$scope.startpoints = 110;
 		setMinValueToStats($scope.npc.race.nome);
 		setDiseaseResistance(1);
 		setPoisonResistance(1);
@@ -163,19 +191,20 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	};
 
 	function argonianTraits(){
-
+		setBasicMagicResistance();
 		$scope.npc.resistances.diseaseResistance = 5 + $scope.npc.lvl -1;
-		$scope.npc.resistances.poisonResistance = "Immunity:";
+		$scope.npc.resistances.poisonResistance = "Immunity";
 		baseMinvalue();
 		setMinValueToStats($scope.npc.race.nome);
 
 	};
 
-	function bosmer(){
+	function bosmerTraits(){
+		setBasicMagicResistance();
 		$scope.npc.resistances.diseaseResistance = 5 + $scope.npc.lvl -1;
 		baseMinvalue();
 		setMinValueToStats($scope.npc.race.nome);
-		setBasicMagicResistance();
+		
 
 		//Adcionar Natural Marksman
 	};
@@ -190,7 +219,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 		//Adcionar Dunmer Fighting Style:
 	};
 
-	$scope.imperialTraits = function(){
+	function imperialTraits(){
 		setBasicMagicResistance();
 		baseMinvalue();
 		setMinValueToStats($scope.npc.race.nome);
@@ -198,7 +227,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 		// Adcionar Voice of the Emperor e Might of the Empire
 	};
 
-	$scope.nordTraits = function(){
+	function nordTraits (){
 		setBasicMagicResistance();
 		setMinValueToStats($scope.npc.race.nome);
 		if ($scope.npc.lvl < 15) {
@@ -207,14 +236,14 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 		// Adcionar Northern Warrior:
 	};
 
-	$scope.orcTraits = function(){
+	function orcTraits(){
 		setBasicMagicResistance();
 		$scope.health.multiplicador = 1.2;
 		setMinValueToStats($scope.npc.race.nome);
 		// Adcionar Brute Strength
 	};
 
-	$scope.khajithTraits = function(){
+	function khajithTraits(){
 		setBasicMagicResistance();
 		baseMinvalue();
 		setMinValueToStats($scope.npc.race.nome);
@@ -229,7 +258,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	}
 
 	$scope.setStamina = function(atributoinicial, atributolvl){
-		if (!!atributoinicial && !!atributolvl) {
+		if (!!atributoinicial && atributoinicial != 10) {
 			$scope.npc.atributos.stamina.total = Math.floor(atributoinicial * $scope.stamina.multiplicador) + atributolvl;
 		} else{
 			$scope.npc.atributos.stamina.total  = $scope.stamina.minValue;
@@ -239,7 +268,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 
 
 	$scope.setMagicka = function(atributoinicial, atributolvl){
-		if ($scope.atributoInicialForm.$pristine && !!atributolvl) {
+		if (!!atributoinicial && atributoinicial != 10) {
 			$scope.npc.atributos.magicka.total = Math.floor(atributoinicial * $scope.magicka.multiplicador) + atributolvl;
 		} else{
 			$scope.npc.atributos.magicka.total  = $scope.magicka.minValue;
@@ -249,12 +278,12 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 
 
 	$scope.setHealth = function(atributoinicial, atributolvl){
-		if (!!atributoinicial && !!atributolvl) {
-			$scope.npc.atributos.health.total = $scope.health.minValue;
-		} else{
+		if (!!atributoinicial) {
 			$scope.npc.atributos.health.total = Math.floor(atributoinicial * $scope.health.multiplicador) + atributolvl;
+		} else{
+			$scope.npc.atributos.health.total = $scope.health.minValue;
 			console.log($scope.npc.atributos.health.total);
-		
+
 		}
 		setDamageReduction($scope.npc);
 

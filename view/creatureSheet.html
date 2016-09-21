@@ -5,8 +5,8 @@
   <strong>{{!!npc.lvl ? npc.lvl : 'Level' }} {{!!npc.race.nome ? npc.race.nome : 'Race'}} {{!!npc.race ? '(' + npc.race.type + ')' : '(Type)'}} - {{!!npc.intelligence.type ? npc.intelligence.type : 'Intelligence'}}, {{!!npc.treino.type ? npc.treino.type : 'Training'}}, {{!!npc.role ? npc.role.nome : 'Role'}}</strong>
 </p>
 <p>
-  <strong>{{!!npc.atributos.health.total ? npc.atributos.health.total + ' Health ': ' Health'}}</strong>
-  | <strong>{{!!npc.atributos.stamina.total ? npc.atributos.stamina.total + ' Stamina ' : ' 0 Stamina'}}</strong> | <strong>{{!!npc.atributos.magicka.total ? npc.atributos.magicka.total + ' Magicka ' : ' 0 Magicka'}}</strong>
+  <strong>{{!!npc.atributos.health.total ? npc.atributos.health.total + ' Health ': (!!npc.atributos.health.inicial ? npc.atributos.health.inicial + ' Health' : '0  Health')}}</strong>
+  | <strong>{{!!npc.atributos.stamina.total ? npc.atributos.stamina.total + ' Stamina ' : (!!npc.atributos.stamina.inicial ? npc.atributos.stamina.inicial + ' Stamina' : '0 Stamina')}}</strong> | <strong>{{!!npc.atributos.magicka.total ? npc.atributos.magicka.total + ' Magicka ' : (!!npc.atributos.magicka.inicial ? npc.atributos.magicka.inicial + ' Magicka' : '0 Magicka')}}</strong>
 </p>
 <p>
   <strong>{{!!npc.speed ? npc.speed : 'Speed'}}</strong>
@@ -20,11 +20,15 @@
   <strong>Defenses: </strong>
 </p>
 <p>
-  {{npc.resistances.magicResistence + ' MR'}}<br>
-  {{!!npc.resistances.diseaseResistance ? ' ' + npc.resistances.diseaseResistance + ' Disease
-  Resistance': ''}}<br>
-  {{!!npc.resistances.poisonResistance ? ' ' + npc.resistances.poisonResistance + ' Poison
-  Resistance': ''}}<br>
+  {{(npc.resistances.magicResistance) + ' MR'}}<br>
+  {{!!npc.resistances.diseaseResistance ? ' ' + 'Disease
+  Resistance: ' + npc.resistances.diseaseResistance : ''}}<br>
+  {{!!npc.resistances.poisonResistance ? ' ' + 'Poison
+  Resistance: ' + npc.resistances.poisonResistance: ''}}<br>
+  {{!!npc.resistances.frostResistance ? ' ' + 'Frost
+  Resistance: ' + npc.resistances.frostResistance : ''  }}<br>
+  {{!!npc.resistances.fireResistance ? ' ' + 'Fire
+  Resistance: ' + npc.resistances.fireResistance: ''}}<br>
 </p>
 <p>
   <strong>Attacks</strong>
