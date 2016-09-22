@@ -16,7 +16,7 @@
                           <h4>Level and progresion</h4>
                           <div class="form-group">
                             <label >Level</label>
-                            <input class="form-control" type="number" ng-model="npc.lvl" min="1" max="20" ng-required="true">
+                            <input class="form-control" type="number" ng-model="npc.level" min="1" max="20" ng-required="true">
                           </div>
                           <div class="form-group">
                             <label>Intelligence</label>
@@ -145,19 +145,19 @@
                           <input name="magickaInicialInput" class="form-control" type="number" ng-model="npc.atributos.magicka.inicial" ng-change="setMagicka(npc.atributos.magicka.inicial, 0)" min="0" ng-required="true" value="0">
                         </div>
                       </form>
-                      <h4>Levelup Atributes({{ !!npc.lvl ? (npc.lvl * 10 -10) - npc.atributos.health.lvl - npc.atributos.magicka.lvl - npc.atributos.stamina.lvl: 0}} points remaining)</h4>
+                      <h4>Levelup Atributes({{ !!npc.level ? (npc.level * 10 -10) - npc.atributos.health.level - npc.atributos.magicka.level - npc.atributos.stamina.level: 0}} points remaining)</h4>
                       <form class="form-inline">
                         <div class="form-group">
                           <label>Health</label>
-                          <input class="form-control" type="number" ng-model="npc.atributos.health.lvl" ng-change="setHealth(npc.atributos.health.inicial, npc.atributos.health.lvl)" min="0" ng-required="true">
+                          <input class="form-control" type="number" ng-model="npc.atributos.health.level" ng-change="setHealth(npc.atributos.health.inicial, npc.atributos.health.level)" min="0" ng-required="true">
                         </div>
                         <div class="form-group">
                           <label>Stamina</label>
-                          <input class="form-control" type="number" ng-model="npc.atributos.stamina.lvl" ng-change="setStamina(npc.atributos.stamina.inicial, npc.atributos.stamina.lvl)" min="0" ng-required="true">
+                          <input class="form-control" type="number" ng-model="npc.atributos.stamina.level" ng-change="setStamina(npc.atributos.stamina.inicial, npc.atributos.stamina.level)" min="0" ng-required="true">
                         </div>
                         <div class="form-group">
                           <label>Magicka</label>  
-                          <input class="form-control" type="number" ng-model="npc.atributos.magicka.lvl" min="0" ng-required="true" ng-change="setMagicka(npc.atributos.magicka.inicial, npc.atributos.magicka.lvl)">
+                          <input class="form-control" type="number" ng-model="npc.atributos.magicka.level" min="0" ng-required="true" ng-change="setMagicka(npc.atributos.magicka.inicial, npc.atributos.magicka.level)">
                         </div>
                       </form>
                       {{npc}}

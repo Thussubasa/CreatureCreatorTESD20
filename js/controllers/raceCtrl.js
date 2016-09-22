@@ -2,7 +2,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	$scope.npc = {
 		atributos: {
 			magicka: {}, stamina:{}, health:{}
-		}, race: {}, lvl:0, role:{}, resistances: {}
+		}, race: {}, level:0, role:{}, resistances: {}
 	}
 	$scope.teste = 1;
 	$scope.app = "Creature Creator";
@@ -16,11 +16,11 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	$scope.startpoints = 100;
 	
 	$scope.races = [
-	{nome: "Breton", type: "Humanoid", basespeed: 5},{nome: "Altmer", type: "Humanoid", basespeed: 6},
-	{nome: "Dummer", type: "Humanoid", basespeed: 5},{nome: "Argonian", type: "Humanoid", basespeed: 5},
-	{nome: "Bosmer", type: "Humanoid", basespeed: 6}, {nome: "Nord", type: "Humanoid", basespeed: 5},
-	{nome: "Redguard", type: "Humanoid", basespeed: 5},{nome: "Khajiit", type: "Humanoid", basespeed: 6},
-	{nome: "Imperial", type: "Humanoid" ,basespeed: 5 },{nome: "Orc", type: "Humanoid", basespeed: 6}
+	{nome: "Breton", type: "Humanoid", baseSpeed: 5},{nome: "Altmer", type: "Humanoid", baseSpeed: 6},
+	{nome: "Dummer", type: "Humanoid", baseSpeed: 5},{nome: "Argonian", type: "Humanoid", baseSpeed: 5},
+	{nome: "Bosmer", type: "Humanoid", baseSpeed: 6}, {nome: "Nord", type: "Humanoid", baseSpeed: 5},
+	{nome: "Redguard", type: "Humanoid", baseSpeed: 5},{nome: "Khajiit", type: "Humanoid", baseSpeed: 6},
+	{nome: "Imperial", type: "Humanoid" ,baseSpeed: 5 },{nome: "Orc", type: "Humanoid", baseSpeed: 6}
 	];
 
 	$scope.roles = [{nome: "Defender"}, {nome: "Brawler"}, {nome: "Flanker"},{nome: "Sniper"},{nome: "Sweeper"}, {nome: "Supporter"}];
@@ -67,7 +67,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 			}
 		}
 	});
-	$scope.$watch('npc.lvl', function(){
+	$scope.$watch('npc.level', function(){
 		if ($scope.npc.race.nome == "Altmer") altmerTraits();
 		if ($scope.npc.race.nome == "Argonian") argonianTraits();
 		if ($scope.npc.race.nome == "Redguard") redguardTraits();
@@ -85,6 +85,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	$scope.createNpc= function(npc) {
 		$scope.npcs.push(angular.copy(npc));
 		console.log($scope.npcs);
+		salvarNpcs();
 	};
 
 	$scope.setRace = function(race){
@@ -100,7 +101,6 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 		if (race.nome == "Khajiit") khajithTraits();
 
 
-		
 	};
 
 	function baseMinvalue(){
@@ -119,40 +119,40 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	function setBasicMagicResistance(magicResistance) {
 		if (!!magicResistance) {
 			$scope.npc.resistances.magicResistance = magicResistance
-		}else{
+		}else {
 			$scope.npc.resistances.magicResistance = baseMagicResistance;	
 		}
 	};
 
-	function setPoisonResistance (lvl) {
-		if (lvl = 1) {
-			$scope.npc.resistances.poisonResistance = 5 + $scope.npc.lvl -1;
+	function setPoisonResistance (level) {
+		if (level = 1) {
+			$scope.npc.resistances.setPoisonResistance = 5 + $scope.npc.level -1;
 		}else{
-			$scope.npc.resistances.poisonResistance = 5 + Math.floor($scope.npc.lvl/2);
+			$scope.npc.resistances.poisonResistance = 5 + Math.floor($scope.npc.level/2);
 		}
 	};
 
-	function setDiseaseResistance (lvl) {
-		if (lvl = 1) {
-			$scope.npc.resistances.diseaseResistance = 5 + $scope.npc.lvl -1;
+	function setDiseaseResistance (level) {
+		if (level = 1) {
+			$scope.npc.resistances.diseaseResistance = 5 + $scope.npc.level -1;
 		}else{
-			$scope.npc.resistances.diseaseResistance = 5 + Math.floor($scope.npc.lvl/2);
+			$scope.npc.resistances.diseaseResistance = 5 + Math.floor($scope.npc.level/2);
 		}
 	};
 
-	function setFireResistance (lvl) {
-		if (lvl = 1) {
-			$scope.npc.resistances.fireResistance = 5 + $scope.npc.lvl -1;
+	function setFireResistance (level) {
+		if (level = 1) {
+			$scope.npc.resistances.fireResistance = 5 + $scope.npc.level -1;
 		}else{
-			$scope.npc.resistances.fireResistance = 5 + Math.floor($scope.npc.lvl/2);
+			$scope.npc.resistances.fireResistance = 5 + Math.floor($scope.npc.level/2);
 		}
 	};
 
-	function setFrostResistance (lvl) {
-		if (lvl = 1) {
-			$scope.npc.resistances.frostResistance = 5 + $scope.npc.lvl -1;
+	function setFrostResistance (level) {
+		if (level = 1) {
+			$scope.npc.resistances.frostResistance = 5 + $scope.npc.level -1;
 		}else{
-			$scope.npc.resistances.frostResistance = 5 + Math.floor($scope.npc.lvl/2);
+			$scope.npc.resistances.frostResistance = 5 + Math.floor($scope.npc.level/2);
 		}
 	};
 
@@ -192,7 +192,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 
 	function argonianTraits(){
 		setBasicMagicResistance();
-		$scope.npc.resistances.diseaseResistance = 5 + $scope.npc.lvl -1;
+		$scope.npc.resistances.diseaseResistance = 5 + $scope.npc.level -1;
 		$scope.npc.resistances.poisonResistance = "Immunity";
 		baseMinvalue();
 		setMinValueToStats($scope.npc.race.nome);
@@ -201,7 +201,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 
 	function bosmerTraits(){
 		setBasicMagicResistance();
-		$scope.npc.resistances.diseaseResistance = 5 + $scope.npc.lvl -1;
+		$scope.npc.resistances.diseaseResistance = 5 + $scope.npc.level -1;
 		baseMinvalue();
 		setMinValueToStats($scope.npc.race.nome);
 		
@@ -210,7 +210,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	};
 
 	function dummerTraits(){
-		if ($scope.npc.lvl < 15) {
+		if ($scope.npc.level < 15) {
 			setFireResistance(1);	
 		}
 		baseMinvalue();
@@ -230,7 +230,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	function nordTraits (){
 		setBasicMagicResistance();
 		setMinValueToStats($scope.npc.race.nome);
-		if ($scope.npc.lvl < 15) {
+		if ($scope.npc.level < 15) {
 			setFrostResistance(1);
 		}
 		// Adcionar Northern Warrior:
@@ -257,9 +257,9 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 		if (atributo=="magicka") $scope.magicka.multiplicador= 1.1;
 	}
 
-	$scope.setStamina = function(atributoinicial, atributolvl){
+	$scope.setStamina = function(atributoinicial, atributolevel){
 		if (!!atributoinicial && atributoinicial != 10) {
-			$scope.npc.atributos.stamina.total = Math.floor(atributoinicial * $scope.stamina.multiplicador) + atributolvl;
+			$scope.npc.atributos.stamina.total = Math.floor(atributoinicial * $scope.stamina.multiplicador) + atributolevel;
 		} else{
 			$scope.npc.atributos.stamina.total  = $scope.stamina.minValue;
 		}
@@ -267,9 +267,9 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	};
 
 
-	$scope.setMagicka = function(atributoinicial, atributolvl){
+	$scope.setMagicka = function(atributoinicial, atributolevel){
 		if (!!atributoinicial && atributoinicial != 10) {
-			$scope.npc.atributos.magicka.total = Math.floor(atributoinicial * $scope.magicka.multiplicador) + atributolvl;
+			$scope.npc.atributos.magicka.total = Math.floor(atributoinicial * $scope.magicka.multiplicador) + atributolevel;
 		} else{
 			$scope.npc.atributos.magicka.total  = $scope.magicka.minValue;
 		}
@@ -277,9 +277,9 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	}; 
 
 
-	$scope.setHealth = function(atributoinicial, atributolvl){
+	$scope.setHealth = function(atributoinicial, atributolevel){
 		if (!!atributoinicial) {
-			$scope.npc.atributos.health.total = Math.floor(atributoinicial * $scope.health.multiplicador) + atributolvl;
+			$scope.npc.atributos.health.total = Math.floor(atributoinicial * $scope.health.multiplicador) + atributolevel;
 		} else{
 			$scope.npc.atributos.health.total = $scope.health.minValue;
 			console.log($scope.npc.atributos.health.total);
@@ -292,7 +292,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	function setSpeed(npc){
 		var modStamina = Math.floor(npc.atributos.stamina.total / 50);
 		console.log(modStamina);
-		$scope.npc.speed = npc.race.basespeed + modStamina;
+		$scope.npc.speed = npc.race.baseSpeed + modStamina;
 		setDodge($scope.npc);
 	}; 
 
@@ -305,5 +305,18 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 		$scope.npc.damageReduction = baseDR + modHealth;
 	};	
 
+	// carregarNpcs();
+
+	// function carregarNpcs () {
+	// 	$http.get("http://localhost:8080/creature_creator/rest/npcs").success(function (data) {
+	// 		$scope.npc = data;
+	// 	});
+	// };
+
+	function salvarNpcs () {
+		$http.post("http://localhost:8080/creature_creator/rest/npcs", $scope.npc).success(function (data) {
+			$scope.npc = data;
+		});
+	};
 
 });

@@ -7,5 +7,5 @@ angular.module("creatureCreator").config(function ($routeProvider) {
 		templateUrl: "view/skill.html"
 	});
 
-//	$routeProvider.otherwise({redirectTo: "/race"});
+$routeProvider.otherwise({redirectTo: "/"});
 });
