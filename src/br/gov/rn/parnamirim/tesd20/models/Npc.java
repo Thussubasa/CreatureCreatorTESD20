@@ -19,7 +19,8 @@ public class Npc {
 
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private long id;
 	
 	@OneToOne( optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
@@ -42,8 +43,8 @@ public class Npc {
 	@JoinColumn(name="role_id")
 	private Role role;
 	
-	@OneToOne( optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name="resistance_id")
+	@OneToOne
+	@JoinColumn(name="resistances_id")
 	private Resistances resistances;
 	
 	@Column(name="level")
@@ -107,11 +108,11 @@ public class Npc {
 		this.role = role;
 	}
 	
-	public Resistances getResistences(){
+	public Resistances getResistances(){
 		return resistances;
 	}
 	
-	public void setResistences(Resistances resistance){
+	public void setResistances(Resistances resistance){
 		this.resistances = resistance;
 	}
 	
@@ -137,6 +138,14 @@ public class Npc {
 	
 	public void setDodge(Integer dodge){
 		this.dodge = dodge;
+	}
+	
+	public Integer getDamageReduction(){
+		return damageReduction;
+	}
+	
+	public void setDamageReduction(Integer damageReduction){
+		this.damageReduction = damageReduction;
 	}
 	
 }

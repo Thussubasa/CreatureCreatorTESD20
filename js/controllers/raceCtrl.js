@@ -2,8 +2,10 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	$scope.npc = {
 		atributos: {
 			magicka: {}, stamina:{}, health:{}
-		}, race: {}, level:0, role:{}, resistances: {}
+		}, race: {}, level:0, role:{}, resistances:{}
 	}
+
+
 	$scope.teste = 1;
 	$scope.app = "Creature Creator";
 
@@ -82,11 +84,12 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 
 
 
-	$scope.createNpc= function(npc) {
-		$scope.npcs.push(angular.copy(npc));
-		console.log($scope.npcs);
-		salvarNpcs();
+
+	$scope.createNpc = function (npc) {
+		$http.post("http://localhost:8080/creature_creator/rest/npcs", npc).success(function (data) {
+		});
 	};
+
 
 	$scope.setRace = function(race){
 		if (race.nome == "Altmer") altmerTraits();
@@ -175,8 +178,8 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 		$scope.stamina.minValue = 10;
 		$scope.startpoints = 110;
 		setMinValueToStats($scope.npc.race.nome);
-		setDiseaseResistance(1);
-		setPoisonResistance(1);
+		// setDiseaseResistance(1);
+		// setPoisonResistance(1);
 		//adicionar Born to Battle:
 	};
 
@@ -313,10 +316,7 @@ angular.module("creatureCreator").controller("raceCtrl", function ($scope, $http
 	// 	});
 	// };
 
-	function salvarNpcs () {
-		$http.post("http://localhost:8080/creature_creator/rest/npcs", $scope.npc).success(function (data) {
-			$scope.npc = data;
-		});
-	};
+	
+
 
 });

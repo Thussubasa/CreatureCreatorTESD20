@@ -39,8 +39,11 @@ public class NpcDAO extends DAO{
 			session = getHibernateSession();
 
 			transaction = session.beginTransaction();
-
-			session.save(npc);
+			
+			session.persist(npc.getAtributos().getHealth());
+			session.persist(npc.getAtributos().getMagicka());
+			session.persist(npc.getAtributos().getStamina());
+			session.persist(npc);
 
 			transaction.commit();
 		} catch (Exception e) {

@@ -3,7 +3,9 @@ package br.gov.rn.parnamirim.tesd20.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -11,8 +13,10 @@ import javax.persistence.Table;
 public class Magicka {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private long id;
+	
 	@Column(name="inicial")
 	private Integer inicial;
 	
@@ -39,13 +43,14 @@ public class Magicka {
 		this.inicial = inicial;
 	}
 
-	public Integer getLvl(){
+	public Integer getLevel(){
 		return level;
 	}
 	
-	public void setLvl(Integer level){
+	public void setLevel(Integer level){
 		this.level = level;
 	}
+	
 	public Integer getTotal(){
 		return total;
 	}
